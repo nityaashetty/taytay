@@ -97,8 +97,7 @@ def search_short_to_long(user_input, similarity_threshold=0.6):
     
     return matches
 
-# %%
-df.to_csv("taylor_swift_songs_with_abbr.csv", index=False)
 
 
-# %%
+
+

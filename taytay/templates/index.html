@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TayTay Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Taylor Shortened</h1>
+        <form class="search-form" action="/search" method="post">
+            <input type="text" name="user_input" placeholder="Enter song or abbreviation" required>
+            
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="long" name="choice" value="long" checked>
+                    <label for="long">Longform → Shortform</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="short" name="choice" value="short">
+                    <label for="short">Shortform → Longform</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+    </div>
+</body>
+</html>

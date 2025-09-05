@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Results</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body class="results-page">
+    <div class="results-container">
+        <h2 class="results-title">Results for "{{ query }}"</h2>
+
+        {% if results %}
+            <table class="results-table">
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Match</th>
+                    <th>Play</th>
+                </tr>
+                {% for first, second, match_type, url in results %}
+                <tr>
+                    <td>{{ first }}</td>
+                    <td>{{ second }}</td>
+                    <td class="match-cell">
+                        {% if match_type == "exact" %}
+                            <span class="match-exact">✓</span>
+                        {% else %}
+                            <span class="match-partial">~</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <button class="play-btn" onclick="togglePlay('{{ url }}', '{{ first }}', this)">
+                            <div class="play-icon"></div>
+                            Play
+                        </button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <div class="no-results">
+                <p>No matches found.</p>
+            </div>
+        {% endif %}
+
+        <a href="/" class="back-link">Search again</a>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+</html>

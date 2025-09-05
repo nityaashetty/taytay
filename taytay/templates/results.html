@@ -1,53 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Search Results</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - TayTay Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="results-page">
-    <div class="results-container">
-        <h2 class="results-title">Results for "{{ query }}"</h2>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="main-title">Taylor Shortened</h1>
+            <h2 class="results-title">Results for "{{ query }}"</h2>
+        </header>
 
-        {% if results %}
-            <table class="results-table">
-                <tr>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Match</th>
-                    <th>Play</th>
-                </tr>
-                {% for first, second, match_type, url in results %}
-                <tr>
-                    <td>{{ first }}</td>
-                    <td>{{ second }}</td>
-                    <td class="match-cell">
-                        {% if match_type == "exact" %}
-                            <span class="match-exact">✓</span>
-                        {% else %}
-                            <span class="match-partial">~</span>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <button class="play-btn" onclick="togglePlay('{{ url }}', '{{ first }}', this)">
-                            <div class="play-icon"></div>
-                            Play
-                        </button>
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-        {% else %}
-            <div class="no-results">
-                <p>No matches found.</p>
-            </div>
-        {% endif %}
+        <main class="results-main">
+            {% if results %}
+                <div class="results-container">
+                    {% for first, second, match_type, url in results %}
+                    <div class="result-card">
+                        <div class="song-info">
+                            <div class="song-from">
+                                <label>From:</label>
+                                <span>{{ first }}</span>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="song-to">
+                                <label>To:</label>
+                                <span>{{ second }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="match-info">
+                            <span class="match-type {% if match_type == 'exact' %}exact{% else %}fuzzy{% endif %}">
+                                {% if match_type == "exact" %}
+                                    ✓ Exact Match
+                                {% else %}
+                                    ~ Fuzzy Match
+                                {% endif %}
+                            </span>
+                        </div>
+                        
+                        <div class="play-section">
+                            <a href="{{ url }}" target="_blank" class="play-button">
+                                <span class="play-icon">▶</span>
+                                Play on Spotify
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-results">
+                    <div class="no-results-icon">🔍</div>
+                    <h3>No matches found</h3>
+                    <p>Try a different search term or check your spelling</p>
+                </div>
+            {% endif %}
+        </main>
 
-        <a href="/" class="back-link">Search again</a>
+        <footer>
+            <a href="/" class="back-button">← Search Again</a>
+        </footer>
     </div>
-
-    <script src="static/script.js"></script>
 </body>
 </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - TayTay Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="main-title">Taylor Shortened</h1>
+            <h2 class="results-title">Results for "{{ query }}"</h2>
+        </header>
+
+        <main class="results-main">
+            {% if results %}
+                <div class="results-container">
+                    {% for first, second, match_type, url in results %}
+                    <div class="result-card">
+                        <div class="song-info">
+                            <div class="song-from">
+                                <label>From:</label>
+                                <span>{{ first }}</span>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="song-to">
+                                <label>To:</label>
+                                <span>{{ second }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="match-info">
+                            <span class="match-type {% if match_type == 'exact' %}exact{% else %}fuzzy{% endif %}">
+                                {% if match_type == "exact" %}
+                                    ✓ Exact Match
+                                {% else %}
+                                    ~ Fuzzy Match
+                                {% endif %}
+                            </span>
+                        </div>
+                        
+                        <div class="play-section">
+                            <a href="{{ url }}" target="_blank" class="play-button">
+                                <span class="play-icon">▶</span>
+                                Play on Spotify
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-results">
+                    <div class="no-results-icon">🔍</div>
+                    <h3>No matches found</h3>
+                    <p>Try a different search term or check your spelling</p>
+                </div>
+            {% endif %}
+        </main>
+
+        <footer>
+            <a href="/" class="back-button">← Search Again</a>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,31 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TayTay Search</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Taylor Shortened</h1>
-        <form class="search-form" action="/search" method="post">
-            <input type="text" name="user_input" placeholder="Enter song or abbreviation" required>
-            
-            <div class="radio-group">
-                <div class="radio-item">
-                    <input type="radio" id="long" name="choice" value="long" checked>
-                    <label for="long">Longform → Shortform</label>
+        <header>
+            <h1 class="main-title">Taylor Shortened</h1>
+            <p class="subtitle">Find Taylor Swift songs in abbreviated form</p>
+        </header>
+
+        <main>
+            <form action="/search" method="post" class="search-form">
+                <div class="input-group">
+                    <input type="text" name="user_input" placeholder="Enter song or abbreviation" class="search-input" required>
                 </div>
-                <div class="radio-item">
-                    <input type="radio" id="short" name="choice" value="short">
-                    <label for="short">Shortform → Longform</label>
+                
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="choice" value="long" checked class="radio-input">
+                        <span class="radio-text">Longform → Shortform</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="choice" value="short" class="radio-input">
+                        <span class="radio-text">Shortform → Longform</span>
+                    </label>
                 </div>
-            </div>
-            
-            <button type="submit" class="search-btn">Search</button>
-        </form>
+                
+                <button type="submit" class="search-button">Search Songs</button>
+            </form>
+        </main>
+
+        <footer>
+            <p class="footer-text">Discover Taylor Swift's discography in a whole new way</p>
+        </footer>
     </div>
 </body>
 </html>

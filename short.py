@@ -92,7 +92,7 @@ def search_short_to_long(user_input, similarity_threshold=0.6):
         
         for close_sf in close_shortforms:
             matching_row = df[df["Short Form"].str.lower() == close_sf].iloc[0]
-            play_url = f"https://open.spotify.com/track/{row['id']}"
+            play_url = f"https://open.spotify.com/track/{matching_row['id']}"
             matches.append((matching_row["Short Form"], matching_row["name"], 'fuzzy', play_url))
     
     return matches
